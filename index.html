@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DanyVPN</title>
     <style>
-        /* Стили для браузера */
         body { 
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white; 
@@ -45,11 +44,10 @@
 </head>
 <body>
 
-    <!-- ЭТО УВИДЯТ ТОЛЬКО В БРАУЗЕРЕ -->
     <div class="container">
-        <h1>🔐 DanyVPN</h1>        <div class="subtitle">Admin Panel</div>
-        <p>Это панель управления. Для подключения используйте ссылку подписки в VPN клиенте.</p>
-        <a href="javascript:copyLink()" class="btn">📋 Скопировать ссылку подписки</a>
+        <h1>🔐 DanyVPN</h1>
+        <div class="subtitle">Admin Panel</div>
+        <p>Это панель управления. Для подключения используйте ссылку подписки в VPN клиенте.</p>        <a href="javascript:copyLink()" class="btn">📋 Скопировать ссылку подписки</a>
     </div>
 
     <script>
@@ -64,39 +62,50 @@
                         ua.includes('hiddify') ||
                         ua.includes('sing-box') ||
                         ua.includes('nekobox') ||
+                        ua.includes('happproxy') ||
                         window.location.href.includes('raw');
 
         if (isVpnApp) {
-            // ЭТО УВИДИТ HAPP И ДРУГИЕ VPN ПРИЛОЖЕНИЯ
-            // Формируем подписку с серверами
+            // =========================================================================
+            // ФОРМИРУЕМ ПОДПИСКУ С ПРАВИЛЬНЫМИ ЗАГОЛОВКАМИ
+            // =========================================================================
             
+            // Заголовки подписки (должны быть в первых строках!)
+            const headers = [
+                "#profile-title: DanyVPN",
+                "#subscription-userinfo: upload=0; download=0; total=0; expire=0",
+                "#",
+                "# 👑 DanyVPN Admin Version",
+                "# 🕵️ Выдано владельцем подписки",
+                "# ↓ Сервера",
+                "#"
+            ];
+            
+            // Серверы (пустышки для тестирования)
             const servers = [
                 "vless://00000000-0000-0000-0000-000000000000@127.0.0.1:1230?encryption=none&security=none&type=tcp#ℹ️+DanyVPN+Admin+Version",
                 "vless://00000000-0000-0000-0000-000000000001@127.0.0.1:1231?encryption=none&security=none&type=tcp#🕵️+Выдано+владельцем+подписки",
                 "vless://00000000-0000-0000-0000-000000000002@127.0.0.1:1232?encryption=none&security=none&type=tcp#↓+Сервера",
-                "vless://00000000-0000-0000-0000-000000000003@127.0.0.1:1233?encryption=none&security=none&type=tcp#🇩🇪+ADMIN+|+Germany+(Plus)",
-                "vless://00000000-0000-0000-0000-000000000004@127.0.0.1:1234?encryption=none&security=none&type=tcp#🇺🇸+ADMIN+|+USA+(Plus)",
+                "vless://00000000-0000-0000-0000-000000000003@127.0.0.1:1233?encryption=none&security=none&type=tcp#🇩+ADMIN+|+Germany+(Plus)",
+                "vless://00000000-0000-0000-0000-000000000004@127.0.0.1:1234?encryption=none&security=none&type=tcp#🇺+ADMIN+|+USA+(Plus)",
                 "vless://00000000-0000-0000-0000-000000000005@127.0.0.1:1235?encryption=none&security=none&type=tcp#🇳🇱+ADMIN+|+Netherlands+(Plus)"
             ];
             
-            // Соединяем все серверы в одну строку через перенос
-            const subscriptionText = servers.join('\n');
+            // Объединяем заголовки и серверы
+            const subscriptionText = [...headers, ...servers].join('\n');
             
-            // Кодируем в base64 (как требуют VPN клиенты)
+            // Кодируем в base64
             const base64 = btoa(unescape(encodeURIComponent(subscriptionText)));
-            
-            // Очищаем страницу и показываем только base64
-            document.body.innerHTML = '<pre style="white-space: pre-wrap; word-break: break-all; padding: 20px;">' + base64 + '</pre>';
+                        // Показываем только base64 для VPN клиентов
+            document.body.innerHTML = '<pre style="white-space: pre-wrap; word-break: break-all; padding: 20px; font-size: 12px;">' + base64 + '</pre>';
             document.body.style.background = 'white';
             document.body.style.color = 'black';
-            
-            // Для некоторых клиентов нужно установить заголовок
-            console.log('Serving VPN subscription');
         }
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href);
-            alert('✅ Ссылка скопирована!\nВставьте её в Happ/v2rayNG в раздел "Подписки"');        }
+            alert('✅ Ссылка скопирована!\nВставьте её в Happ/v2rayNG в раздел "Подписки"');
+        }
     </script>
 
 </body>
