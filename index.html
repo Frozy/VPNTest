@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DanyVPN</title>
+    <title>DanyVPN - Панель Администратора</title>
     <style>
         body { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #0f172a; 
             color: white; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             display: flex; 
@@ -14,99 +14,113 @@
             align-items: center; 
             min-height: 100vh; 
             margin: 0; 
-            padding: 20px;
+            padding: 20px; 
+            box-sizing: border-box; 
         }
         .container { 
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px; 
-            border-radius: 24px; 
+            background-color: #1e293b; 
+            padding: 30px; 
+            border-radius: 20px; 
             width: 100%; 
-            max-width: 400px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 400px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            text-align: center; 
         }
-        h1 { font-size: 32px; margin-bottom: 10px; }
-        .subtitle { opacity: 0.9; margin-bottom: 30px; }
-        .btn {
-            background: white;
-            color: #667eea;
-            padding: 15px 30px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-            transition: transform 0.2s;
+        h1 { font-size: 26px; margin-bottom: 5px; color: #f8fafc; }
+        .desc { color: #94a3b8; font-size: 14px; margin-bottom: 25px; line-height: 1.5; }
+        .section-title { font-size: 11px; text-transform: uppercase; color: #64748b; letter-spacing: 1px; margin: 25px 0 10px 0; text-align: left; font-weight: bold; }
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 12px; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            font-size: 15px; 
+            text-decoration: none; 
+            border: none; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            box-sizing: border-box; 
+            text-align: center; 
         }
-        .btn:hover { transform: translateY(-2px); }
+        .btn-primary { background-color: #3b82f6; color: white; }
+        .btn-primary:hover { background-color: #2563eb; }
+        .btn-outline { background-color: transparent; color: #3b82f6; border: 2px solid #3b82f6; }
+        .btn-outline:hover { background-color: rgba(59, 130, 246, 0.1); }        .btn-accent { background-color: #10b981; color: white; }
+        .btn-accent:hover { background-color: #059669; }
+        .badge { background-color: #ef4444; color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🔐 DanyVPN</h1>
-        <div class="subtitle">Admin Panel</div>
-        <p>Это панель управления. Для подключения используйте ссылку подписки в VPN клиенте.</p>        <a href="javascript:copyLink()" class="btn">📋 Скопировать ссылку подписки</a>
+        <div class="badge">ADMIN ACCESS</div>
+        <h1>DanyVPN</h1>
+        <div class="desc">Admin версия VPN-клиента DanyVPN, создано специально владельцем.</div>
+
+        <div class="section-title">1. Автоматическое добавление</div>
+        <button onclick="openClient('v2ray')" class="btn btn-primary">Открыть в v2rayTun / happ</button>
+        <button onclick="openClient('v2rayng')" class="btn btn-primary">Открыть в v2rayNG</button>
+        <button onclick="openClient('hiddify')" class="btn btn-primary">Открыть в Hiddify</button>
+
+        <div class="section-title">2. Если кнопка не сработала</div>
+        <button onclick="copySubUrl()" class="btn btn-outline">📋 Скопировать ссылку подписки</button>
+        <button onclick="copyRawConfig()" class="btn btn-accent">📋 Скопировать код конфига</button>
     </div>
 
     <script>
-        const ua = navigator.userAgent.toLowerCase();
-        const isVpnApp = ua.includes('v2ray') || 
-                        ua.includes('shadowrocket') || 
-                        ua.includes('streisand') ||
-                        ua.includes('hiddify') ||
-                        ua.includes('sing-box') ||
-                        ua.includes('nekobox') ||
-                        ua.includes('happproxy') ||
-                        ua.includes('happ') ||
-                        window.location.search.includes('raw') ||
-                        window.location.search.includes('sub');
+        // =========================================================================
+        // ССЫЛКА НА ЭТУ СТРАНИЦУ (замени на свою реальную ссылку GitHub Pages)
+        const rawSubUrl = window.location.href;
+        // =========================================================================
 
-        if (isVpnApp) {
-            // Полностью очищаем страницу
-            document.open();
-            document.close();
+        // Текст серверов с ЗАГОЛОВКАМИ ПОДПИСКИ
+        const configs = [
+            // === ЗАГОЛОВКИ (должны быть первыми!) ===
+            "#profile-title: DanyVPN",
+            "#subscription-userinfo: upload=0; download=0; total=0; expire=0",
+            "#",
+            "# 👑 DanyVPN Admin Version",
+            "# 🕵️ Выдано владельцем подписки",
+            "# ↓ Сервера",
+            "#",
             
-            // Устанавливаем plain text
-            document.body.style.background = 'white';
-            document.body.style.color = 'black';
-            document.body.style.fontFamily = 'monospace';
+            // === СЕРВЕРЫ ===
+            "vless://00000000-0000-0000-0000-000000000000@127.0.0.1:1230?encryption=none&security=none&type=tcp#ℹ️+Admin+версия+VPN-клиента+DanyVPN",
+            "vless://00000000-0000-0000-0000-000000000001@127.0.0.1:1231?encryption=none&security=none&type=tcp#🕵️+Создано+специально+владельцем",
+            "vless://00000000-0000-0000-0000-000000000002@127.0.0.1:1232?encryption=none&security=none&type=tcp#🇩+ADMIN+|+Germany+(Plus)",
+            "vless://00000000-0000-0000-0000-000000000003@127.0.0.1:1233?encryption=none&security=none&type=tcp#🇺🇸+ADMIN+|+USA+(Plus)",
+            "vless://00000000-0000-0000-0000-000000000004@127.0.0.1:1234?encryption=none&security=none&type=tcp#🇳🇱+ADMIN+|+Netherlands+(Plus)"
+        ].join("\n");
+
+        function openClient(type) {
+            let link = "";
+                        if (type === 'v2ray') {
+                link = `v2ray://install-sub?url=${encodeURIComponent(rawSubUrl)}&name=DanyVPN`;
+            } else if (type === 'v2rayng') {
+                link = `v2rayng://install-sub?url=${encodeURIComponent(rawSubUrl)}&name=DanyVPN`;
+            } else if (type === 'hiddify') {
+                link = `hiddify://import/${encodeURIComponent(rawSubUrl)}#DanyVPN`;
+            }
             
-            // Заголовки подписки
-            const headers = [
-                "#profile-title: DanyVPN",
-                "#subscription-userinfo: upload=0; download=0; total=0; expire=0",
-                "#",
-                "# 👑 DanyVPN Admin Version",
-                "# 🕵️ Выдано владельцем подписки",
-                "# ↓ Сервера",
-                "#"
-            ];
+            window.location.href = link;
             
-            // Серверы
-            const servers = [
-                "vless://00000000-0000-0000-0000-000000000000@127.0.0.1:1230?encryption=none&security=none&type=tcp#ℹ️ DanyVPN Admin Version",
-                "vless://00000000-0000-0000-0000-000000000001@127.0.0.1:1231?encryption=none&security=none&type=tcp#🕵️ Выдано владельцем подписки",
-                "vless://00000000-0000-0000-0000-000000000002@127.0.0.1:1232?encryption=none&security=none&type=tcp#↓ Сервера",
-                "vless://00000000-0000-0000-0000-000000000003@127.0.0.1:1233?encryption=none&security=none&type=tcp#🇩 ADMIN | Germany (Plus)",
-                "vless://00000000-0000-0000-0000-000000000004@127.0.0.1:1234?encryption=none&security=none&type=tcp#🇺 ADMIN | USA (Plus)",
-                "vless://00000000-0000-0000-0000-000000000005@127.0.0.1:1235?encryption=none&security=none&type=tcp#🇳🇱 ADMIN | Netherlands (Plus)"
-            ];
-            
-            // Просто выводим текст (не base64!)
-            const subscriptionText = [...headers, ...servers].join('\n');
-            document.body.innerText = subscriptionText;            
-            // Пробуем установить заголовок (может не сработать с GitHub Pages)
-            const meta = document.createElement('meta');
-            meta.httpEquiv = 'Content-Type';
-            meta.content = 'text/plain; charset=utf-8';
-            document.head.appendChild(meta);
+            setTimeout(() => {
+                alert('Если приложение не открылось, используйте кнопку "Скопировать ссылку подписки"');
+            }, 2000);
         }
 
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href);
-            alert('✅ Ссылка скопирована!\nВставьте её в Happ в раздел "Подписки"');
+        function copySubUrl() {
+            navigator.clipboard.writeText(rawSubUrl);
+            alert("✅ Ссылка скопирована!\n\n1. Откройте Happ/v2rayNG\n2. Нажмите '+' или 'Добавить подписку'\n3. Вставьте ссылку");
+        }
+
+        function copyRawConfig() {
+            // Кодируем в Base64
+            const base64Config = btoa(unescape(encodeURIComponent(configs)));
+            navigator.clipboard.writeText(base64Config);
+            alert("✅ Код скопирован!\n\nОткройте приложение и выберите 'Импорт из буфера обмена'");
         }
     </script>
 
