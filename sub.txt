@@ -1,7 +1,7 @@
 #profile-title: DanyVPN
 #subscription-userinfo: upload=0; download=0; total=0; expire=0
 #profile-update-interval: 1
-#profile-web-page-url: https://frozy.github.io/VPNTest/
+#profile-web-page-url: https://frozy.github.io/DanyVPN/
 #
 # ═══════════════════════════════════════════
 # 👑 DanyVPN Admin Version
