@@ -1,5 +1,5 @@
 #profile-title: DanyVPN
-#subscription-userinfo: upload=0; download=0; total=0; expire=2097792000
+#subscription-userinfo: upload=0; download=0; total=0; expire=2097792000 description=%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0%3A%20%40vpn_support_bot
 #profile-update-interval: 1
 #profile-web-page-url: https://frozy.github.io/DanyVPN/
 #
