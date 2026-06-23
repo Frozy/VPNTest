@@ -15,5 +15,4 @@
 vless://00000000-0000-0000-0000-000000000000@127.0.0.1:1230?encryption=none&security=none&type=tcp#ℹ️+Admin+версия+VPN-клиента+DanyVPN
 vless://00000000-0000-0000-0000-000000000001@127.0.0.1:1231?encryption=none&security=none&type=tcp#🕵️+Создано+специально+владельцем
 vless://00000000-0000-0000-0000-000000000002@127.0.0.1:1232?encryption=none&security=none&type=tcp#🗄️+Сервера+тут+↓
-vless://00000000-0000-0000-0000-000000000003@127.0.0.1:1233?encryption=none&security=none&type=tcp#🇺🇸+ADMIN+|+USA+(Plus)
-vless://00000000-0000-0000-0000-000000000004@127.0.0.1:1234?encryption=none&security=none&type=tcp#🇳🇱+ADMIN+|+Netherlands+(Plus)
+vless://f9255507-1b65-433f-bfd8-193b35e068e2@45.8.211.140:80?host=s5.868001.xyz&path=%2FTelegram%F0%9F%87%A8%F0%9F%87%B3%2B%40WangCai2&security=none&type=ws#🇸🇬+Сингапур+[🐌]
