@@ -4,13 +4,6 @@
 #profile-update-interval: 1
 #profile-web-page-url: https://frozy.github.io/DanyVPN/
 #
-# ═══════════════════════════════════════════
-# 👑 DanyVPN Admin Version
-# 🕵️ Выдано владельцем подписки
-# ⚡ Безлимитный трафик
-#  Премиум серверы по всему миру
-# ═══════════════════════════════════════════
-#
 # ↓ Сервера ↓
 #
 vless://00000000-0000-0000-0000-000000000000@127.0.0.1:1230?encryption=none&security=none&type=tcp#ℹ️+Admin+версия+VPN-подписки+DanyVPN
